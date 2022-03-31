@@ -1,3 +1,17 @@
+[web sunuculari]
+
+
 192.168.2.105  apache_sunucu=apache2 php_kutuphane=libapache2-mode-php
 192.168.2.42   apache_sunucu=apache2 php_kutuphane=libapache2-mode-php
 
+
+
+[veritabanı sunuculari]
+192.168.2.105
+
+
+
+
+[ftp_suncuları]
+
+10.10.10.10

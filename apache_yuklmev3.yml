@@ -1,0 +1,55 @@
+---
+- hosts : all
+  become: true
+  tasks:
+#sunucu guncellemeleri
+  -name :bu gore ubuntu güncellemerini yapar
+    -ansible.builtin.package
+        upgrade: dist
+        update_cache : yes
+  when: ansible_distribution == "ubuntu"
+        
+
+-name :bu gore linux rocky guncllemelerini yapar
+    -ansible.builtin.package
+        upgrade_only : yes
+        update_cache : yes
+  when: ansible_distribution == "Rocky"
+
+
+
+
+###############################
+####   ansible-playbook --ask-become-pass apache_yuklemeve.yml ##########  BU KOMUTLA ÇALIŞTIRILIR
+################################
+
+  # -name :bu gore ubuntu apache php kutuphanesi yuklmesi
+  #   -ansible.builtin.package
+  #     name:
+  #       - "{{ apache_sunucusu }}"
+  #       - "{{ php_kutuphane }}"
+  #     state :latest
+  #     update_cache : yes  
+
+
+
+  #This missson ubuntu § rocky 
+
+  -hosts : web_sunuculari
+  become:true
+  tasks:
+
+    - name : işletim sistemlerini tespit et
+      debug : var=ansible_os_family
+
+    - name :dosyalardan degıskenlerı oku.
+      include_vars: "{{ lookup('first_found',params)}}"
+      vars:
+        params:
+          files:
+            - "vars/apache_{{ ansibe_os_family }}.yml"
+            - "vars/apache_varsayilan.yml "
+
+
+
+

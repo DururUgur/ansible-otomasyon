@@ -1,0 +1,25 @@
+---
+  -hosts: all
+   become: true
+   tasks:
+    -name : Bugorevv apt paket indexsini gunceller
+      apt:
+        update_cache : yes
+      when: ansible_distribiton =="ubuntu"
+    -name : Bu gorev apache 2 yuklemesini gerceklestirir.
+     apt:
+      name : apache2
+    -name : Bu gorev php  2 yuklemesini gerceklestirir.
+     apt:
+      name: apachlibapache2-mod-php
+      state: latest  #absent kaldırmak için kullanılır
+     when: ansible_distribiton =="ubuntu"  #ubuntu olan sucularda çalısır sadeceü
+    #==rocky sunucu 
+     when: ansible_distribiton =="ubuntu"  #ubuntu olan sucularda çalısır sadeceü
+     # ansible all -m apt -a name = htop --become -K
+
+     #ansible-playbook --ask-become-pass apche_yukleme.yml
+
+
+    
+      
